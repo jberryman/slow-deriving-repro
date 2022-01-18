@@ -27,7 +27,6 @@ $( fmap concat $ for
 
          -- instance Cacheable a => Cacheable ($(conT name) a)
 
-         deriving instance Eq a => Eq ($(conT name) a)
 
          -- instance NFData a => NFData ($(conT name) a)
 
@@ -57,7 +56,6 @@ $( fmap concat $ for
 
          -- instance Cacheable $(conT name)
 
-         deriving instance Eq $(conT name)
 
          deriving instance Show $(conT name)
 
@@ -65,7 +63,6 @@ $( fmap concat $ for
 
          -- instance NFData $(conT name)
 
-         deriving instance Ord $(conT name)
          |]
  )
 
@@ -128,7 +125,6 @@ $( fmap concat $ for
 
          -- instance Cacheable $(conT name)
 
-         deriving instance Eq $(conT name)
 
          deriving instance Show $(conT name)
 
@@ -138,10 +134,6 @@ $( fmap concat $ for
          |]
  )
 
-$( fmap concat $ for
-     [''TableName, ''ScalarType]
-     \name -> [d|deriving instance Ord $(conT name)|]
- )
 
 $( fmap concat $ for
      [''TableName, ''NullsOrder, ''Order]
@@ -180,7 +172,6 @@ deriving instance Generic (Countable n)
 
 -- instance Cacheable n => Cacheable (Countable n)
 
-deriving instance Eq n => Eq (Countable n)
 
 deriving instance Show n => Show (Countable n)
 
@@ -190,7 +181,6 @@ deriving instance Data n => Data (Countable n)
 
 
 
-deriving instance Ord ColumnName
 
 instance Monoid Where where
   mempty = Where mempty
@@ -217,7 +207,6 @@ deriving instance Traversable BooleanOperators
 
 deriving instance Show a => Show (BooleanOperators a)
 
-deriving instance Eq a => Eq (BooleanOperators a)
 
 -- instance NFData a => NFData (BooleanOperators a)
 
