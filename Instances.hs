@@ -21,7 +21,6 @@ $( fmap concat $ for
      [''Aliased]
      \name ->
        [d|
-         deriving instance Generic ($(conT name) a)
 
          -- instance Hashable a => Hashable ($(conT name) a)
 
@@ -30,9 +29,7 @@ $( fmap concat $ for
 
          -- instance NFData a => NFData ($(conT name) a)
 
-         deriving instance Show a => Show ($(conT name) a)
 
-         deriving instance Functor $(conT name)
 
          deriving instance Data a => Data ($(conT name) a)
          |]
@@ -50,14 +47,12 @@ $( fmap concat $ for
      ]
      \name ->
        [d|
-         deriving instance Generic $(conT name)
 
          -- instance Hashable $(conT name)
 
          -- instance Cacheable $(conT name)
 
 
-         deriving instance Show $(conT name)
 
          deriving instance Data $(conT name)
 
@@ -119,14 +114,12 @@ $( fmap concat $ for
      ]
      \name ->
        [d|
-         deriving instance Generic $(conT name)
 
          -- instance Hashable $(conT name)
 
          -- instance Cacheable $(conT name)
 
 
-         deriving instance Show $(conT name)
 
          deriving instance Data $(conT name)
 
@@ -135,10 +128,6 @@ $( fmap concat $ for
  )
 
 
-$( fmap concat $ for
-     [''TableName, ''NullsOrder, ''Order]
-     \name -> [d|deriving instance Lift $(conT name)|]
- )
 
 --------------------------------------------------------------------------------
 -- Third-party types
@@ -166,14 +155,12 @@ $( fmap concat $ for
 --------------------------------------------------------------------------------
 -- Manual instances
 
-deriving instance Generic (Countable n)
 
 -- instance Hashable n => Hashable (Countable n)
 
 -- instance Cacheable n => Cacheable (Countable n)
 
 
-deriving instance Show n => Show (Countable n)
 
 deriving instance Data n => Data (Countable n)
 
@@ -181,31 +168,6 @@ deriving instance Data n => Data (Countable n)
 
 
 
-
-instance Monoid Where where
-  mempty = Where mempty
-
-instance Semigroup Where where
-  (Where x) <> (Where y) = Where (x <> y)
-
-instance Monoid Top where
-  mempty = NoTop
-
-instance Semigroup Top where
-  (<>) :: Top -> Top -> Top
-  (<>) NoTop x = x
-  (<>) x NoTop = x
-  (<>) (Top x) (Top y) = Top (min x y)
-
-deriving instance Generic (BooleanOperators a)
-
-deriving instance Functor BooleanOperators
-
-deriving instance Foldable BooleanOperators
-
-deriving instance Traversable BooleanOperators
-
-deriving instance Show a => Show (BooleanOperators a)
 
 
 -- instance NFData a => NFData (BooleanOperators a)
